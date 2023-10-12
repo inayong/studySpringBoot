@@ -16,9 +16,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class MemberVO {
+
 	private int id;
 	private String pass;
 	private String name;
 	private Date regidate;
-	
 }
