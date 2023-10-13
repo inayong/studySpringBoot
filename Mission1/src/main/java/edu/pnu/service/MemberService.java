@@ -52,9 +52,31 @@ public class MemberService {
 		return memberVO;
 	}
 	
+	private MemberVO findMember(Integer id) {
+		for (MemberVO m : list) {
+			if (m.getId() == id)
+				return m;
+		}
+		return null;
+	}
+	
 	public MemberVO updateMember(MemberVO memberVO) {
 		
+		MemberVO fm = findMember(memberVO.getId());
+		if (memberVO != null) fm.setName(memberVO.getName());
+		if (memberVO != null) fm.setPass(memberVO.getPass());
 		
+		return fm;
+	}
+	
+	public MemberVO deleteMember(Integer id) {
+		for (int i = 0; i < list.size(); i++) {
+			MemberVO m = list.get(i);
+			if (m.getId() == id) {
+				list.remove(i);
+				return m;				
+			}
+		}
 		return null;
 	}
 	
