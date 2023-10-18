@@ -33,11 +33,27 @@ public class MemberDaoTest {
 	}
 	
 	@DisplayName("MemberDao Select Test")
-	@Test
+//	@Test
 	public void testSelect() {
 		MemberDao dao = new MemberDao();
 		
 		MemberVO m = dao.getMember(1);
+		System.out.println(m);
+	}
+	
+	@DisplayName("MemberDao Update Test")
+//	@Test
+	public void testUpdate() {
+		MemberDao dao = new MemberDao();
+		MemberVO m = dao.updateMember(MemberVO.builder().name("길동홍").id(5).build());
+		System.out.println(m);
+	}
+	
+	@DisplayName("MemberDao Remove Test")
+	@Test
+	public void testRemove() {
+		MemberDao dao = new MemberDao();
+		MemberVO m = dao.removeMember(4);
 		System.out.println(m);
 	}
 }

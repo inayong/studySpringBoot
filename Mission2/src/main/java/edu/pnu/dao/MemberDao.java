@@ -87,23 +87,58 @@ public class MemberDao {
 			psmt.setInt(1, id);
 			rs = psmt.executeQuery();
 			
-			while (rs.next()) {
-				
-				
+			rs.next();
+//			while (rs.next()) {
+//				
 				mvo.setId(rs.getInt("id"));
 				mvo.setPass(rs.getString("pass"));
 				mvo.setName(rs.getString("name"));
 				mvo.setRegidate(rs.getDate("regidate"));
-			}
+//			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		for (MemberVO m : list) {
-//			if (m.getId() == id)
-//				return m;
-//		}	
+	
 		return mvo;
+	}
+	
+	public MemberVO updateMember(MemberVO memberVO) {
+//		int result = 0;
+//		ResultSet rs;
+		PreparedStatement psmt;
+//		MemberVO mvo = new MemberVO();
+		
+		try {
+			String query = "update member set name=? where id=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, memberVO.getName());
+			psmt.setInt(2, memberVO.getId());
+			psmt.executeUpdate();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return memberVO;
+		
+	}
+	
+	public MemberVO removeMember(int id) {
+		PreparedStatement psmt;
+		
+		try {
+			String query = "DELETE FROM member WHERE ID=?";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, id);
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 //	getMembers();
