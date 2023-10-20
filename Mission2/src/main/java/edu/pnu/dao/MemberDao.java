@@ -103,26 +103,50 @@ public class MemberDao {
 		return mvo;
 	}
 	
+//	public MemberVO updateMember(MemberVO memberVO) {
+//		PreparedStatement psmt;
+//		
+//		try {
+//			String query = "update member set name=? where id=?";
+//			psmt = con.prepareStatement(query);
+//			psmt.setString(1, memberVO.getName());
+//			psmt.setInt(2, memberVO.getId());
+//			psmt.executeUpdate();
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return memberVO;
+//	}
+
 	public MemberVO updateMember(MemberVO memberVO) {
-//		int result = 0;
-//		ResultSet rs;
-		PreparedStatement psmt;
-//		MemberVO mvo = new MemberVO();
+		Statement st;
 		
 		try {
-			String query = "update member set name=? where id=?";
-			psmt = con.prepareStatement(query);
-			psmt.setString(1, memberVO.getName());
-			psmt.setInt(2, memberVO.getId());
-			psmt.executeUpdate();
+			//String query = "update member set name=? where id=?";
+			String query = "update member ";
+			String set = "set";
 			
+			if (memberVO.getPass() != null) {
+				set += (" pass='" + memberVO.getPass() + "' ");
+			}
+			if (memberVO.getName() != null) {
+				if (!set.equals("set")) set += ",";
+				set += (" name='" + memberVO.getName() + "' ");
+			}
+			
+			query += (set + " where id=" + memberVO.getId());
+			// update member  set pass='1234'  where id=1
+			// update member  set name='lee'  where id=1
+			// update member  set pass='1234', name='lee'  where id=1 
+
+			st = con.createStatement();
+			st.executeUpdate(query);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return memberVO;
-		
 	}
 	
 	public MemberVO removeMember(int id) {
