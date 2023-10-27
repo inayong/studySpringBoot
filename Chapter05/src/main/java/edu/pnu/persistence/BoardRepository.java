@@ -1,4 +1,4 @@
-package edu.pnu;
+package edu.pnu.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

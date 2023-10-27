@@ -5,14 +5,15 @@ import java.util.List;
 import edu.pnu.domain.MemberVO;
 
 public interface MemberInterface {
+
 	int addMember(MemberVO memberVO);
 
 	List<MemberVO> getMembers();
 
 	MemberVO getMember(int id);
 
-	int updateMember(MemberVO memberVO);
+	MemberVO updateMember(MemberVO memberVO);
 
-	int removeMember(int id);
+	MemberVO removeMember(int id);
 
 }

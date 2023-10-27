@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import edu.pnu.domain.Board;
+import edu.pnu.persistence.BoardRepository;
 
 @SpringBootTest
 public class BoardTest {
@@ -61,7 +62,7 @@ public class BoardTest {
 	@Test
 	public void BoardInsertManybyBuilder() {
 		Random rd = new Random();
-		for (int i = 0 ; i < 50; i++) {
+		for (int i = 0 ; i < 100; i++) {
 			boardRepo.save(Board.builder()
 					.title("title" + i)
 					.writer("writer" + (i%2+1))

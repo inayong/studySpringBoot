@@ -2,55 +2,54 @@ package edu.pnu.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.dao.MemberDaoH2Impl;
-import edu.pnu.dao.MemberDaoListImpl;
+import edu.pnu.dao.MemberDaoListImp;
 import edu.pnu.dao.MemberInterface;
 import edu.pnu.domain.MemberVO;
 
 @Service
 public class MemberService {
-
-	private MemberInterface memberDao;
+	MemberInterface memberDAO;
 	
-
+	//@Autowired
+	//private Environment env; //application 프로퍼티에 있는 데이터를 읽을 때 사용
+	
 	public MemberService(Environment env) {
-//	public MemberService() {
 		
-		String type = env.getProperty("service.type");
-		if (type != null && type.equals("h2")) {
-			System.out.println("h2service");
-			memberDao = new MemberDaoH2Impl();
+		String type = env.getProperty("mywebservice.data.type");
+		
+		if(type.equals("h2")) {
+			memberDAO = new MemberDaoH2Impl();
+			System.out.println("h2 서비스");
 		}
-//		else if (type.equals("mysql"))  memberDao = new MemberDaoMySQLImpl();
 		else {
-			System.out.println("listservice");
-			memberDao = new MemberDaoListImpl();
+			memberDAO = new MemberDaoListImp();
+			System.out.println("리스트 서비스");
 		}
-		
-		memberDao = new MemberDaoH2Impl(); 	
+	}
+	
+	public int addMember(MemberVO memberVO) {
+		return memberDAO.addMember(memberVO);
 	}
 	
 	public List<MemberVO> getMembers() {
-		return memberDao.getMembers();
+		return memberDAO.getMembers();
 	}
 	
 	public MemberVO getMember(int id) {
-		return memberDao.getMember(id);
+		return memberDAO.getMember(id);
 	}
 	
-	public int addMember(MemberVO mvo) {
-		return memberDao.addMember(mvo);
+	public int updateMember(MemberVO memberVO) {
+		return memberDAO.updateMember(memberVO);
 	}
 	
-	public MemberVO updateMember(MemberVO mvo) {
-		return memberDao.updateMember(mvo);
-	}
-	
-	public MemberVO removeMember(int id) {
-		return memberDao.removeMember(id);
+	public int removeMember(int id) {
+		return memberDAO.removeMember(id);
 	}
 
 }

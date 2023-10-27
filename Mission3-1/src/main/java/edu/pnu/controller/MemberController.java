@@ -1,5 +1,6 @@
 package edu.pnu.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,17 @@ import edu.pnu.service.MemberService;
 
 @RestController
 public class MemberController {
+
+//	private MemberService memberService; 
+//	
+//	//생성자
+//	public MemberController() {
+//		memberService = new MemberService();
+//	}
 	
-	@Autowired // Service 어노테이션에서 만들어진 객체를 자동으로 할당
+//	MemberService memberService = new MemberService();
+	
+	@Autowired
 	MemberService memberService;
 	
 	@GetMapping("/member")
@@ -24,32 +34,23 @@ public class MemberController {
 		return memberService.getMembers();
 	}
 	
-	@GetMapping("/member/{id}") //PathVariable
-	public MemberVO getMember(@PathVariable Integer id) {
-		return memberService.getMember(id);
-	}
-	@GetMapping("/member2") // 쿼리스트링
-	public MemberVO getMember2(Integer id) {
+	@GetMapping("/member/{id}")
+	public MemberVO getMember(@PathVariable int id) {
 		return memberService.getMember(id);
 	}
 	
-	@PostMapping("/member") 
-	public int addMember(MemberVO memberVO) {
-		return memberService.addMember(memberVO);
+	@PostMapping("/member")
+	public int addMember(MemberVO mvo) {
+		return memberService.addMember(mvo);
 	}
 	
 	@PutMapping("/member")
-	public int updateMember(MemberVO memberVO) {
-		return memberService.updateMember(memberVO);
+	public MemberVO updateMember(MemberVO mvo) {
+		return memberService.updateMember(mvo);
 	}
 	
-	@DeleteMapping("/member/{id}") //PathVariable
-	public int removeMember(@PathVariable Integer id) {
+	@DeleteMapping("/member/{id}")
+	public MemberVO removeMember(@PathVariable int id) {
 		return memberService.removeMember(id);
 	}
-	@DeleteMapping("/member") //쿼리스트링 사용
-	public int removeMember2(Integer id) {
-		return memberService.removeMember(id);
-	}
-	
 }

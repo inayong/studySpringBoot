@@ -15,10 +15,9 @@ import edu.pnu.service.MemberService;
 
 @RestController
 public class MemberController {
-	
-	@Autowired // Service 어노테이션에서 만들어진 객체를 자동으로 할당
+	@Autowired
 	MemberService memberService;
-	
+
 	@GetMapping("/member")
 	public List<MemberVO> getMembers() {
 		return memberService.getMembers();

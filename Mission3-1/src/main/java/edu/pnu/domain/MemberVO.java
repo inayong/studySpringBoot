@@ -1,6 +1,7 @@
 package edu.pnu.domain;
 
 import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,12 +12,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberVO {
-	private int id;
-	private String pass;
-	private String name;
-	private Date regidate;
+
+	int id;
+	String pass;
+	String name;
+	Date regidate;
 }
