@@ -25,6 +25,6 @@ public class Board {
 	private String content;
 	@Column(insertable = false, updatable = false)
 	private Date createDate;
-	@Column(insertable = false, updatable = false, columnDefinition = "number default 0")
+	@Column(insertable = false, updatable = false)
 	private Long cnt;
 }
