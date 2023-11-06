@@ -39,7 +39,9 @@ public class MemberService {
 	}
 //
 	public Member removeMember(int id) {
-		return memberRepo.deleteById();
+		return null;
+//		return memberRepo.deleteById();
+		
 	}
 
 
