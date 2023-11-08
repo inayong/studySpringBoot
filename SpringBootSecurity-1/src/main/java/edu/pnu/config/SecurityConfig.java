@@ -14,7 +14,7 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(security->security
-				.requestMatchers(new AntPathRequestMatcher("/member/**")).authenticated() //AntPathRequestMatcher -> h2사용할때만, 다른건 없이해도됨
+				.requestMatchers(new AntPathRequestMatcher("/member/**")).authenticated()
 				.requestMatchers(new AntPathRequestMatcher("/manager/**")).hasRole("MANAGER")
 				.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole("ADMIN")
 				.anyRequest().permitAll());
@@ -22,8 +22,10 @@ public class SecurityConfig {
 		http.csrf(cf->cf.disable());
 		
 		http.formLogin(form->form
-				.loginPage("/login")
-				.defaultSuccessUrl("/loginSuccess", true));
+						.loginPage("/login")
+						.defaultSuccessUrl("/loginSuccess", true));
+	
+		http.exceptionHandling(ex->ex.accessDeniedPage("/accessDenied"));
 		
 		return http.build();
 	}
